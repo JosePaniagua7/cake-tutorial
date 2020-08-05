@@ -137,16 +137,33 @@ class ArticlesController extends AppController
     {
         $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
-            //Check if print works and how the request looks
-            pr($this->request->getData());
-            $article  = $this->Articles->patchEntity($article, $this->request->getData());
-            //hardcoding the user_id is temporaty, and should be removed; 
+            $article = $this->Articles->patchEntity($article, $this->request->getData());
+
+            // Hardcoding the user_id is temporary, and will be removed later
+            // when we build authentication out.
             $article->user_id = 1;
+            // $article->slug = 'slug_test';
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been saved.'));
                 return $this->redirect(['action' => 'index']);
+            } else {
+                // pr($article);
+                $this->Flash->error(__('Unable to add your article.'));
             }
-            $this->Flash->error(__('Unable to add your article'));
+        }
+        $this->set('article', $article);
+    }
+
+    public function edit($slug)
+    {
+        $article = $this->Articles->findBySlug($slug)->firstOrFail();
+        if ($this->request->is(['post', 'put'])) {
+            $this->Articles->patchEntity($article, $this->request->getData());
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('Your article has been updated'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to update your article'));
         }
         $this->set('article', $article);
     }
