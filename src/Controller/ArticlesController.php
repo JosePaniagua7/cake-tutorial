@@ -185,4 +185,22 @@ class ArticlesController extends AppController
             return $this->redirect(['action' => 'index']);
         }
     }
+
+    public function tags()
+    {
+        //important to notice that the key pass in the params 
+        //object is injected by cakephp
+        $tags = $this->request->getParam('pass');
+        pr('tags is: ');
+        pr($tags);
+
+        $articles = $this->Articles->find('tagged', [
+            'tags' => $tags
+        ]);
+
+        $this->set([
+            'articles' => $articles,
+            'tags' => $tags
+        ]);
+    }
 }
