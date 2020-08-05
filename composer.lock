@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7b42e4311daa1ff8b0af4326d849437",
+    "content-hash": "473b249d2b9a4f5c0925c2848212d63f",
     "packages": [
         {
             "name": "aura/intl",
@@ -2146,38 +2146,34 @@
         },
         {
             "name": "cakephp/debug_kit",
-            "version": "4.3.1",
+            "version": "3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/debug_kit.git",
-                "reference": "6ca239b0ec403a4b0632e3a294a1e2b39ba5c57c"
+                "reference": "5cb72a353a3ef868b8d8c7373dfd342148413068"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/6ca239b0ec403a4b0632e3a294a1e2b39ba5c57c",
-                "reference": "6ca239b0ec403a4b0632e3a294a1e2b39ba5c57c",
+                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/5cb72a353a3ef868b8d8c7373dfd342148413068",
+                "reference": "5cb72a353a3ef868b8d8c7373dfd342148413068",
                 "shasum": ""
             },
             "require": {
-                "cakephp/cakephp": "^4.1",
-                "cakephp/chronos": "^2.0",
-                "composer/composer": "^1.3",
-                "jdorn/sql-formatter": "^1.2",
-                "php": ">=7.2"
+                "cakephp/cakephp": ">=3.1.0",
+                "jdorn/sql-formatter": "~1.2"
             },
             "require-dev": {
-                "cakephp/authorization": "^2.0",
-                "cakephp/cakephp-codesniffer": "^4.0",
-                "phpunit/phpunit": "^8.0"
+                "cakephp/cakephp-codesniffer": "dev-master",
+                "phpunit/phpunit": "4.1.*"
             },
             "suggest": {
-                "ext-pdo_sqlite": "DebugKit needs to store panel data in a database. SQLite is simple and easy to use."
+                "ext-sqlite": "DebugKit needs to store panel data in a database. SQLite is simple and easy to use."
             },
             "type": "cakephp-plugin",
             "autoload": {
                 "psr-4": {
-                    "DebugKit\\": "src/",
-                    "DebugKit\\Test\\Fixture\\": "tests/Fixture/"
+                    "DebugKit\\": "src",
+                    "DebugKit\\Test\\Fixture\\": "tests\\Fixture"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2187,7 +2183,7 @@
             "authors": [
                 {
                     "name": "Mark Story",
-                    "homepage": "https://mark-story.com",
+                    "homepage": "http://mark-story.com",
                     "role": "Author"
                 },
                 {
@@ -2202,7 +2198,7 @@
                 "debug",
                 "kit"
             ],
-            "time": "2020-07-29T15:31:40+00:00"
+            "time": "2015-12-29T23:26:31+00:00"
         },
         {
             "name": "cakephp/twig-view",
