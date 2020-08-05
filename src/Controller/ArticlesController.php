@@ -142,12 +142,11 @@ class ArticlesController extends AppController
             // Hardcoding the user_id is temporary, and will be removed later
             // when we build authentication out.
             $article->user_id = 1;
-            // $article->slug = 'slug_test';
+            $article->slug = $article->title;
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                // pr($article);
                 $this->Flash->error(__('Unable to add your article.'));
             }
         }
