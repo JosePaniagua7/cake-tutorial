@@ -138,7 +138,6 @@ class ArticlesController extends AppController
         $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
-
             // Hardcoding the user_id is temporary, and will be removed later
             // when we build authentication out.
             $article->user_id = 1;
@@ -149,13 +148,20 @@ class ArticlesController extends AppController
             } else {
                 $this->Flash->error(__('Unable to add your article.'));
             }
+            $this->Flash->error(__('Unable to add your article.'));
         }
+        $tags = $this->Articles->Tags->find('list');
+        $this->set('tags', $tags);
         $this->set('article', $article);
     }
 
     public function edit($slug)
     {
-        $article = $this->Articles->findBySlug($slug)->firstOrFail();
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags')
+            ->firstOrFail();
+
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
@@ -164,6 +170,9 @@ class ArticlesController extends AppController
             }
             $this->Flash->error(__('Unable to update your article'));
         }
+        $tags = $this->Articles->Tags->find('list');
+
+        $this->set('tags', $tags);
         $this->set('article', $article);
     }
 
