@@ -17,11 +17,12 @@ class UsersController extends AppController
     {
         parent::beforeFilter($event);
         //Code to prevent infinite loop
-        $this->Authentication->addUnauthenticatedActions(['login', 'add']);
+        $this->Authentication->addUnauthenticatedActions(['login', 'add']);        
     }
 
     public function login()
     {
+        $this->Authorization->skipAuthorization(['login', 'add']);
         $this->request->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
         if ($result->isValid()) {
@@ -38,6 +39,7 @@ class UsersController extends AppController
 
     public function logout()
     {
+        $this->Authorization->skipAuthorization(['login', 'add']);
         $result = $this->Authentication->getResult();
         if ($result->isValid()) {
             $this->Authentication->logout();
@@ -79,6 +81,7 @@ class UsersController extends AppController
      */
     public function add()
     {
+        $this->Authorization->skipAuthorization(['login', 'add']);
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());

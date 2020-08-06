@@ -54,6 +54,9 @@ class AppController extends Controller
 
         // Add this line to check authentication result and lock your site
         $this->loadComponent('Authentication.Authentication');
+
+        // Loading authorization compnent
+        $this->loadComponent('Authorization.Authorization');
     }
 
     /*since all index and views pages should be available without 
