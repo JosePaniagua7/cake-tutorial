@@ -50,7 +50,9 @@ use Psr\Http\Message\ResponseInterface;
  * want to use in your application.
  */
 class Application extends BaseApplication
-implements AuthenticationServiceProviderInterface
+implements
+    AuthenticationServiceProviderInterface,
+    AuthorizationServiceProviderInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
@@ -115,7 +117,10 @@ implements AuthenticationServiceProviderInterface
                 'httponly' => true,
             ]))
             // add Authentication after RoutingMiddleware
-            ->add(new AuthenticationMiddleware($this));
+            ->add(new AuthenticationMiddleware($this))
+            // add Authorization after Authentication
+            ->add(new AuthorizationMiddleware($this));
+
 
         return $middlewareQueue;
     }
@@ -167,5 +172,12 @@ implements AuthenticationServiceProviderInterface
         ]);
 
         return $authenticationService;
+    }
+
+    public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
+    {
+        $resolver = new OrmResolver();
+
+        return new AuthorizationService($resolver);
     }
 }
