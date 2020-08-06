@@ -46,7 +46,7 @@ class Article extends Entity
         'modified' => true,
         'user' => true,
         'tags' => true,
-        'tab_string' => true
+        'tag_string' => true
     ];
 
     protected function _getTagString()
